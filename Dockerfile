@@ -4,7 +4,6 @@ FROM debian:bullseye
 # Install necessary dependencies and tools
 RUN apt-get update && \
     apt-get install -y \
-    # openssh-server \
     dkms \
     build-essential \
     git \
@@ -44,14 +43,6 @@ RUN usermod -a -G video root
 # Ensure the container has access to video devices
 ENV UDEV=on
 ENV LD_LIBRARY_PATH=/usr/local/lib/aarch64-linux-gnu:/libcamera/build/src/libcamera:${LD_LIBRARY_PATH}
-# Set up SSH access 
-# RUN mkdir /var/run/sshd
-# RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-# RUN sed -i 's|#AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2|AuthorizedKeysFile     .ssh/authorized_keys .ssh/authorized_keys2|' /etc/ssh/sshd_config
-# RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-# RUN mkdir /root/.ssh
-# RUN touch /root/.ssh/authorized_keys 
-# EXPOSE 22
 
 WORKDIR /usr/src/app
 
