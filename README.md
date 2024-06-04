@@ -13,8 +13,8 @@ container:
   buffers
 - media0:4
 - v4l-subdev0 and v4l-subdev1, both of which are only available after
-  specifying the imx-703 Raspberry Pi device tree overlay in /boot/config.txt
-  (imx-703 refers to the driver specific to the pi camera module 3)
+  specifying the imx-708 Raspberry Pi device tree overlay in /boot/config.txt
+  (imx-708 refers to the driver specific to the pi camera module 3)
 - vchiq
 - vcsm-cma
 - video0, video1, video10:16, video18:23, and video31
