@@ -44,6 +44,14 @@ RUN usermod -a -G video root
 ENV UDEV=on
 ENV LD_LIBRARY_PATH=/usr/local/lib/aarch64-linux-gnu:/libcamera/build/src/libcamera:${LD_LIBRARY_PATH}
 
+# Copy the script into the container
+COPY take_picture.sh /usr/src/app/take_picture.sh
+
+# Make the script executable
+RUN chmod +x /usr/src/app/take_picture.sh
+
 WORKDIR /usr/src/app
 
-CMD ["watch", "-n", "5", "rpicam-still", "-o", "image.png", "--width", "1920", "--height", "1080"]
+# Run the script
+CMD ["/usr/src/app/take_picture.sh"]
+ 
