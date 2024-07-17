@@ -46,4 +46,4 @@ ENV LD_LIBRARY_PATH=/usr/local/lib/aarch64-linux-gnu:/libcamera/build/src/libcam
 
 WORKDIR /usr/src/app
 
-CMD ["sleep", "infinity"]
+CMD ["rpicam-still", "-o", "image.png", "--width", "1920", "--height", "1080"]
