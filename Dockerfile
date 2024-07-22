@@ -52,6 +52,6 @@ RUN chmod +x /usr/src/app/take_picture.sh
 
 WORKDIR /usr/src/app
 
-# Run the script
+# Run the script 
 CMD ["/usr/src/app/take_picture.sh"]
  
