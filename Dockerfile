@@ -1,63 +1,63 @@
-# # Use a base Debian Bullseye image
-# FROM debian:bullseye
+# Use a base Debian Bullseye image
+FROM debian:bullseye
 
-FROM balenalib/raspberrypi4-64-ubuntu-python:3.10-jammy-build
-RUN apt-get update && apt-get install -y python3-picamera2 --no-install-recommends
+# FROM balenalib/raspberrypi4-64-ubuntu-python:3.10-jammy-build
+# RUN apt-get update && apt-get install -y python3-picamera2 --no-install-recommends
 
-# # Install necessary dependencies and tools
-# RUN apt-get update && \
-#     apt-get install -y \
-#     dkms \
-#     build-essential \
-#     git \
-#     v4l-utils \
-#     python3-dev \
-#     python3-pip \
-#     python3-yaml \
-#     python3-ply \
-#     cmake \
-#     libboost-dev \
-#     libgnutls28-dev openssl libtiff5-dev libjpeg-dev libpng-dev pybind11-dev \
-#     qtbase5-dev libqt5core5a libqt5gui5 libqt5widgets5 \
-#     libboost-program-options-dev libdrm-dev libexif-dev \
-#     && apt-get clean
+# Install necessary dependencies and tools
+RUN apt-get update && \
+    apt-get install -y \
+    dkms \
+    build-essential \
+    git \
+    v4l-utils \
+    python3-dev \
+    python3-pip \
+    python3-yaml \
+    python3-ply \
+    cmake \
+    libboost-dev \
+    libgnutls28-dev openssl libtiff5-dev libjpeg-dev libpng-dev pybind11-dev \
+    qtbase5-dev libqt5core5a libqt5gui5 libqt5widgets5 \
+    libboost-program-options-dev libdrm-dev libexif-dev \
+    && apt-get clean
 
-# # Install the required Python modules using pip
-# RUN pip3 install meson ninja jinja2 
-# #ply pyyaml
+# Install the required Python modules using pip
+RUN pip3 install meson ninja jinja2 
+#ply pyyaml
 
-# # Clone and build libcamera
-# RUN git clone https://github.com/raspberrypi/libcamera.git /libcamera && \
-#     cd /libcamera && \
-#     meson setup build --buildtype=release -Dpipelines=rpi/vc4,rpi/pisp -Dipas=rpi/vc4,rpi/pisp -Dv4l2=true -Dgstreamer=disabled -Dtest=false -Dlc-compliance=disabled -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
-#     ninja -C build && \
-#     ninja -C build install
+# Clone and build libcamera
+RUN git clone https://github.com/raspberrypi/libcamera.git /libcamera && \
+    cd /libcamera && \
+    meson setup build --buildtype=release -Dpipelines=rpi/vc4,rpi/pisp -Dipas=rpi/vc4,rpi/pisp -Dv4l2=true -Dgstreamer=disabled -Dtest=false -Dlc-compliance=disabled -Dcam=disabled -Dqcam=disabled -Ddocumentation=disabled -Dpycamera=enabled && \
+    ninja -C build && \
+    ninja -C build install
 
-# # Clone and build rpicam-apps
-# RUN git clone https://github.com/raspberrypi/rpicam-apps.git /rpicam-apps && \
-#     cd /rpicam-apps && \
-#     sed -i 's/platform = options_->GetPlatform();/platform = Platform::VC4;/' core/rpicam_app.cpp && \
-#     meson setup build -Denable_libav=disabled -Denable_drm=enabled -Denable_egl=disabled -Denable_qt=disabled -Denable_opencv=disabled -Denable_tflite=disabled && \
-#     meson compile -C build && \
-#     meson install -C build
+# Clone and build rpicam-apps
+RUN git clone https://github.com/raspberrypi/rpicam-apps.git /rpicam-apps && \
+    cd /rpicam-apps && \
+    sed -i 's/platform = options_->GetPlatform();/platform = Platform::VC4;/' core/rpicam_app.cpp && \
+    meson setup build -Denable_libav=disabled -Denable_drm=enabled -Denable_egl=disabled -Denable_qt=disabled -Denable_opencv=disabled -Denable_tflite=disabled && \
+    meson compile -C build && \
+    meson install -C build
 
-# RUN usermod -a -G video root
+RUN usermod -a -G video root
 
-# # Ensure the container has access to video devices
-# ENV UDEV=on
-# ENV LD_LIBRARY_PATH=/usr/local/lib/aarch64-linux-gnu:/libcamera/build/src/libcamera:${LD_LIBRARY_PATH}
+# Ensure the container has access to video devices
+ENV UDEV=on
+ENV LD_LIBRARY_PATH=/usr/local/lib/aarch64-linux-gnu:/libcamera/build/src/libcamera:${LD_LIBRARY_PATH}
 
 # Copy the script into the container
 # COPY take_picture.sh /usr/src/app/take_picture.sh
-# COPY ls_dev.sh /usr/src/app/ls_dev.sh
+COPY ls_dev.sh /usr/src/app/ls_dev.sh
 
-# # Make the script executable
-# # RUN chmod +x /usr/src/app/take_picture.sh
-# RUN chmod +x /usr/src/app/ls_dev.sh
+# Make the script executable
+# RUN chmod +x /usr/src/app/take_picture.sh
+RUN chmod +x /usr/src/app/ls_dev.sh
 
-# WORKDIR /usr/src/app
+WORKDIR /usr/src/app
 
 # Run the script 
-CMD ["ls -a /dev"]
+CMD ["/usr/src/app/ls_dev.sh"]
  
 
