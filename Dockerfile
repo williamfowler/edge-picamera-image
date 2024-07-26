@@ -1,5 +1,8 @@
-# Use a base Debian Bullseye image
-FROM debian:bullseye
+# # Use a base Debian Bullseye image
+# FROM debian:bullseye
+
+FROM balenalib/raspberrypi4-64-ubuntu-python:3.10-jammy-build
+RUN apt-get update && apt-get install -y python3-picamera2 --no-install-recommends
 
 # # Install necessary dependencies and tools
 # RUN apt-get update && \
@@ -46,14 +49,15 @@ FROM debian:bullseye
 
 # Copy the script into the container
 # COPY take_picture.sh /usr/src/app/take_picture.sh
-COPY ls_dev.sh /usr/src/app/ls_dev.sh
+# COPY ls_dev.sh /usr/src/app/ls_dev.sh
 
-# Make the script executable
-# RUN chmod +x /usr/src/app/take_picture.sh
-RUN chmod +x /usr/src/app/ls_dev.sh
+# # Make the script executable
+# # RUN chmod +x /usr/src/app/take_picture.sh
+# RUN chmod +x /usr/src/app/ls_dev.sh
 
-WORKDIR /usr/src/app
+# WORKDIR /usr/src/app
 
 # Run the script 
-CMD ["/usr/src/app/ls_dev.sh"]
+CMD ["ls -a /dev"]
  
+
