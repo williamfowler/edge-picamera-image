@@ -9,11 +9,13 @@ MQTT_PORT=30001
 
 while true; do
     # Take a picture
-    rpicam-still -o /usr/src/app/image.png --width 1920 --height 1080
+    # rpicam-still -o /usr/src/app/image.png --width 1920 --height 1080
+    libcamera-hello --nopreview
+
+    # # Publish the image to the MQTT broker
+    # mosquitto_pub -h "$MQTT_BROKER" -p "$MQTT_PORT" -u "$MQTT_USERNAME" -P "$MQTT_PASSWORD" -t "$MQTT_TOPIC" -f /usr/src/app/image.png
     
-    # Publish the image to the MQTT broker
-    mosquitto_pub -h "$MQTT_BROKER" -p "$MQTT_PORT" -u "$MQTT_USERNAME" -P "$MQTT_PASSWORD" -t "$MQTT_TOPIC" -f /usr/src/app/image.png
-    
+
     # Wait for 60 seconds
     sleep 60
 done
