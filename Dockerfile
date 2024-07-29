@@ -55,6 +55,8 @@ RUN chmod +x /usr/src/app/ls_dev.sh
 
 WORKDIR /usr/src/app
 
+EXPOSE 30001
+
 # Run the script 
 CMD ["/usr/src/app/take_picture.sh"]
  
