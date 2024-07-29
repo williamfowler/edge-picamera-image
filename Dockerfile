@@ -1,9 +1,6 @@
 # Use a base Debian Bullseye image
 FROM debian:bullseye
 
-# FROM balenalib/raspberrypi4-64-ubuntu-python:3.10-jammy-build
-# RUN apt-get update && apt-get install -y python3-picamera2 --no-install-recommends
-
 # Install necessary dependencies and tools
 RUN apt-get update && \
     apt-get install -y \
@@ -20,6 +17,7 @@ RUN apt-get update && \
     libgnutls28-dev openssl libtiff5-dev libjpeg-dev libpng-dev pybind11-dev \
     qtbase5-dev libqt5core5a libqt5gui5 libqt5widgets5 \
     libboost-program-options-dev libdrm-dev libexif-dev \
+    mosquitto-clients \
     && apt-get clean
 
 # Install the required Python modules using pip
@@ -58,6 +56,6 @@ RUN chmod +x /usr/src/app/ls_dev.sh
 WORKDIR /usr/src/app
 
 # Run the script 
-CMD ["/usr/src/app/ls_dev.sh"]
+CMD ["/usr/src/app/take_picture.sh"]
  
 
