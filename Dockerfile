@@ -17,6 +17,7 @@ RUN apt-get update && \
     libgnutls28-dev openssl libtiff5-dev libjpeg-dev libpng-dev pybind11-dev \
     qtbase5-dev libqt5core5a libqt5gui5 libqt5widgets5 \
     libboost-program-options-dev libdrm-dev libexif-dev \
+    mosquitto \
     mosquitto-clients \
     && apt-get clean
 
