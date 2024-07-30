@@ -1,6 +1,6 @@
 #!/bin/bash
 
 while true; do
-    ls -a /run
+    ls -a /dev
     sleep 5
 done

@@ -1,5 +1,6 @@
 # using Mike's image
 FROM shermanm/rpi4-libcamera-debian:bullseye
+# FROM ghcr.io/chameleoncloud/edge-picamera-image:sha-d858119
 
 RUN apt-get update && \
     apt-get install -y \
@@ -14,5 +15,5 @@ RUN usermod -a -G video root
 
 RUN chmod +x /usr/src/app/take_picture.sh
 
-CMD ["/usr/src/app/take_picture.sh"]
-# CMD ["sleep", "infinity"]
+# CMD ["/usr/src/app/take_picture.sh"]
+CMD ["sleep", "infinity"]
