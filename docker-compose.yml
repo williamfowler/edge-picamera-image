@@ -6,4 +6,9 @@ services:
     build: .
     privileged: true
     ports:
-      - "30001:30001"  # Expose port 300001 for use with FLOTO
+      - "30001:30001"  # Expose port 30001 for use with FLOTO
+    devices:
+      - "/dev/vcsm:/dev/vcsm"
+      - "/dev/video0:/dev/video0"
+    environment:
+      - LIBCAMERA_LOG_LEVELS=INFO
