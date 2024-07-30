@@ -21,7 +21,7 @@
 # done
 
 while true; do
-    libcamera-still --nopreview -o /usr/src/app/image.png --width 1920 --height 1080
-
+    # libcamera-still --nopreview -o /usr/src/app/image.png --width 1920 --height 1080
+    libcamera-hello
     sleep 60
 done

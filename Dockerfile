@@ -13,5 +13,5 @@ RUN usermod -a -G video root
 
 RUN chmod +x /usr/src/app/take_picture.sh
 
-# CMD ["/usr/src/app/take_picture.sh"]
-CMD ["sleep", "infinity"]
+CMD ["/usr/src/app/take_picture.sh"]
+# CMD ["sleep", "infinity"]
