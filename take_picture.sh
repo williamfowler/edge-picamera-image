@@ -5,7 +5,7 @@ MQTT_BROKER="192.5.85.172"
 MQTT_USERNAME="will"
 MQTT_PASSWORD="PlayBallGame83"
 MQTT_TOPIC="picamera/image"
-MQTT_PORT=1883 
+MQTT_PORT=30001
 
 while true; do
     libcamera-still --nopreview -o /usr/src/app/image.png --width 1920 --height 1080
