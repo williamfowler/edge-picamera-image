@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # MQTT broker details
-MQTT_BROKER="192.5.85.172"
+MQTT_BROKER="192.5.86.172"
 MQTT_USERNAME="will"
 MQTT_PASSWORD="PlayBallGame83"
 MQTT_TOPIC="picamera/image"
