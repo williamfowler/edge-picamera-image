@@ -15,6 +15,4 @@ RUN chmod +x /usr/src/app/take_picture.sh
 
 EXPOSE 30001
 
-COPY mosquitto.conf /etc/mosquitto/mosquitto.conf
-
 CMD ["/usr/src/app/take_picture.sh"]

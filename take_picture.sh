@@ -8,12 +8,12 @@ MQTT_TOPIC="test/topic"
 MQTT_PORT=1883
 
 while true; do
-    # libcamera-still --nopreview -o /usr/src/app/image.png --width 1920 --height 1080
+    libcamera-still --nopreview -o /usr/src/app/image.png --width 1920 --height 1080
 
-    # ls /usr/src/app/
+    ls /usr/src/app/
 
-    # mosquitto_pub -h "$MQTT_BROKER" -p "$MQTT_PORT" -u "$MQTT_USERNAME" -P "$MQTT_PASSWORD" -t "$MQTT_TOPIC" -f /usr/src/app/image.png
-    mosquitto_pub -h "$MQTT_BROKER" -p "$MQTT_PORT" -u "$MQTT_USERNAME" -P "$MQTT_PASSWORD" -t "$MQTT_TOPIC" -m "hello from FLOTO!"
+    mosquitto_pub -h "$MQTT_BROKER" -p "$MQTT_PORT" -u "$MQTT_USERNAME" -P "$MQTT_PASSWORD" -t "$MQTT_TOPIC" -f /usr/src/app/image.png
+    # mosquitto_pub -h "$MQTT_BROKER" -p "$MQTT_PORT" -u "$MQTT_USERNAME" -P "$MQTT_PASSWORD" -t "$MQTT_TOPIC" -m "hello from FLOTO!"
 
     sleep 60
 done
